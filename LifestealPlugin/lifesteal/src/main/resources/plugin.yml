@@ -1,0 +1,37 @@
+name: lifesteal
+main: com.lifesteal.Plugin
+version: 0.0.1
+api-version: 1.21
+description: Steal hearts from other players
+
+commands:
+  customitem:
+    description: Get a custom item
+    usage: /<command> <itemname>
+    aliases: [ci]
+    permission: permission.customitem
+  withdraw:
+    description: Withdraw a heart into your hotbar
+    usage: /<command>
+    aliases: [wd]
+    permission: permission.withdraw
+  lifestealrules:
+    description: Rules for lifesteal SMP
+    usage: /<command>
+    aliases: [rules, lsrules, lsr]
+    permission: permission.lifestealrules
+  banneditems:
+    description: List of all banned or modified items
+    usage: /<command>
+    aliases: [bi, items, banneditem]
+    permission: permission.banneditems
+
+permissions:
+  permission.customitem:
+    default: op
+  permission.withdraw:
+    default: true
+  permission.lifestealrules:
+    default: true
+  permission.banneditems:
+    default: true
