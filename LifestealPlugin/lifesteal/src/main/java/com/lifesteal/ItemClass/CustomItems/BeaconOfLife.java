@@ -23,9 +23,9 @@ import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.profile.PlayerProfile;
 
+import com.lifesteal.Plugin;
 import com.lifesteal.ItemClass.CustomItemClass;
 import com.lifesteal.ItemClass.Rarity;
 
@@ -41,15 +41,14 @@ public class BeaconOfLife extends CustomItemClass{
     @Override
     public ShapedRecipe createRecipe(){
         ShapedRecipe recipe = super.createRecipe();
-        recipe.shape(  "HAH",
-                                "BEC",
-                                "HDH");
-        recipe.setIngredient('H', new RecipeChoice.ExactChoice(new HeartCrystal(plugin).create()));
-        recipe.setIngredient('A', Material.MACE);
-        recipe.setIngredient('B', Material.NETHERITE_CHESTPLATE);
-        recipe.setIngredient('C', Material.NETHERITE_LEGGINGS);
-        recipe.setIngredient('D', Material.NETHERITE_BOOTS);
-        recipe.setIngredient('E', Material.ELYTRA);
+        recipe.shape(  "YYY",
+                                "MRM",
+                                "DND");
+        recipe.setIngredient('Y', new RecipeChoice.ExactChoice(new MajorHeartCrystal(plugin).create()));
+        recipe.setIngredient('M', new RecipeChoice.ExactChoice(new MinorHeartCrystal(plugin).create()));
+        recipe.setIngredient('R', Material.RECOVERY_COMPASS);
+        recipe.setIngredient('N', Material.NETHERITE_BLOCK);
+        recipe.setIngredient('D', Material.DIAMOND_BLOCK);
 
         Bukkit.addRecipe(recipe);
 

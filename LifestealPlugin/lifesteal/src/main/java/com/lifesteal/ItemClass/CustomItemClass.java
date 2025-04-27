@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +18,8 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.SmithingTransformRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
+
+import com.lifesteal.Plugin;
 
 
 
@@ -55,7 +57,7 @@ public abstract class CustomItemClass implements Listener {
         meta.addItemFlags(ItemFlag.HIDE_PLACED_ON);
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 
-        for (Attribute attribute : Attribute.values()) {
+        for (Attribute attribute : Registry.ATTRIBUTE) {
             meta.removeAttributeModifier(attribute);
         }
 

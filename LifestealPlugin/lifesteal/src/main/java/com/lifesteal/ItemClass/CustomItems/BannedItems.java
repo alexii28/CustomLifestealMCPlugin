@@ -19,6 +19,14 @@ public class BannedItems implements Listener{
         Material.TOTEM_OF_UNDYING,
         Material.END_CRYSTAL
     };
+    public static final Material[] MANUALLY_BAN = {
+        Material.NETHERITE_HELMET,
+        Material.NETHERITE_CHESTPLATE,
+        Material.NETHERITE_LEGGINGS,
+        Material.NETHERITE_HELMET,
+        Material.MACE
+    };
+
     public static final Material[][] BANNED_ITEMS = {
         HARD_BAN,
         SOFT_BAN

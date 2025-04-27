@@ -8,9 +8,7 @@ import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class LifestealController implements Listener{
     @SuppressWarnings("unused")
@@ -37,7 +35,7 @@ public class LifestealController implements Listener{
     }*/
     //Return true if successful, false otherwise
     public static boolean addHeart(Player player){
-        AttributeInstance playerHealthInstance = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        AttributeInstance playerHealthInstance = player.getAttribute(Attribute.MAX_HEALTH);
         double playerHealthValue = playerHealthInstance.getBaseValue();
         if(playerHealthValue >= MAXIMUM_HEALTH)
             return false;
@@ -47,7 +45,7 @@ public class LifestealController implements Listener{
     }
     
     public static void removeHeart(Player player){
-        AttributeInstance playerHealthInstance = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        AttributeInstance playerHealthInstance = player.getAttribute(Attribute.MAX_HEALTH);
         playerHealthInstance.setBaseValue(playerHealthInstance.getBaseValue() - 2);
         if (playerHealthInstance.getBaseValue() <= 0){
             playerHealthInstance.setBaseValue(20);

@@ -34,7 +34,7 @@ public class EmptyHearts implements Listener{
     public void onPlayerDeath(PlayerDeathEvent e){
         Bukkit.getLogger().info("emptyhearts");
         Player player = e.getEntity();
-        AttributeInstance maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        AttributeInstance maxHealth = player.getAttribute(Attribute.MAX_HEALTH);
         double newHealth = maxHealth.getBaseValue();
     }
 

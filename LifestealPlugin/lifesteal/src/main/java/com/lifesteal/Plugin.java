@@ -13,7 +13,11 @@ import com.lifesteal.Commands.CommandHandler;
 import com.lifesteal.ItemClass.CustomItemManager;
 import com.lifesteal.ItemClass.CustomItems.BannedItems;
 import com.lifesteal.ItemClass.CustomItems.BeaconOfLife;
-import com.lifesteal.ItemClass.CustomItems.HeartCrystal;
+import com.lifesteal.ItemClass.CustomItems.MajorHeartCrystal;
+import com.lifesteal.ItemClass.CustomItems.MinorHeartCrystal;
+import com.lifesteal.LifestealClass.HeartLimitDisplay;
+import com.lifesteal.LifestealClass.InitializePlayer;
+import com.lifesteal.LifestealClass.LifestealController;
 
 public class Plugin extends JavaPlugin{
     private Plugin plugin;
@@ -28,15 +32,17 @@ public class Plugin extends JavaPlugin{
     private FileConfiguration playerData;
 
     public void onEnable(){
-        LOGGER.info("lifesteal enabled");
+        LOGGER.info("lifesteal enabled ");
+        
         plugin = this;
-
+        
         instantiateFiles();
 
         //register Listeners
+        Bukkit.getPluginManager().registerEvents(new InitializePlayer(plugin), plugin);
         Bukkit.getPluginManager().registerEvents(new BannedItems(), plugin);
-        Bukkit.getPluginManager().registerEvents(new EmptyHearts(plugin), plugin);
-        Bukkit.getPluginManager().registerEvents(new LifestealController(), plugin);
+        Bukkit.getPluginManager().registerEvents(new HeartLimitDisplay(plugin), plugin);
+        Bukkit.getPluginManager().registerEvents(new LifestealController(plugin), plugin);
 
         itemManager = new CustomItemManager(this);
         //register command
@@ -49,12 +55,17 @@ public class Plugin extends JavaPlugin{
         this.getCommand("withdraw").setExecutor(new CommandHandler(plugin));
         this.getCommand("lifestealrules").setExecutor(new CommandHandler(plugin));
         this.getCommand("banneditems").setExecutor(new CommandHandler(plugin));
+        this.getCommand("addheart").setExecutor(new CommandHandler(plugin));
     }
 
     private void initializeCustomItems(){
-        //create and register heartCrystal
-        HeartCrystal heartCrystal = new HeartCrystal(plugin);
-        itemManager.registerCustomItem(heartCrystal);
+        //create and register minor heart crystal
+        MinorHeartCrystal minorHeartCrystal = new MinorHeartCrystal(plugin);
+        itemManager.registerCustomItem(minorHeartCrystal);
+
+        //create major heart crystal
+        MajorHeartCrystal majorHeartCrystal = new MajorHeartCrystal(plugin);
+        itemManager.registerCustomItem(majorHeartCrystal);
 
         //create beacon of life
         BeaconOfLife beaconOfLife = new BeaconOfLife(plugin);
@@ -65,7 +76,7 @@ public class Plugin extends JavaPlugin{
         if(!getDataFolder().exists()){
             getDataFolder().mkdirs();
         }
-        //TODO: ADD .exists Check to not overwrite data!!!
+
         playerDataFile = new File(getDataFolder(), "playerdata.yml");
         playerData = YamlConfiguration.loadConfiguration(playerDataFile);
         Bukkit.getLogger().info("playerdata = " + playerData.toString());
@@ -75,8 +86,6 @@ public class Plugin extends JavaPlugin{
             Bukkit.getLogger().warning("PlayerData could not save to file");
             e.printStackTrace();
         }
-        
-
         
         return true;
     }

@@ -1,7 +1,7 @@
 name: lifesteal
 main: com.lifesteal.Plugin
 version: 0.0.1
-api-version: 1.21
+api-version: 1.21.4
 description: Steal hearts from other players
 
 commands:
@@ -11,8 +11,8 @@ commands:
     aliases: [ci]
     permission: permission.customitem
   withdraw:
-    description: Withdraw a heart into your hotbar
-    usage: /<command>
+    description: Withdraw or remove a specific type of heart crystal into your hotbar
+    usage: /<command> <minor|major> [username]
     aliases: [wd]
     permission: permission.withdraw
   lifestealrules:
@@ -25,6 +25,11 @@ commands:
     usage: /<command>
     aliases: [bi, items, banneditem]
     permission: permission.banneditems
+  addheart:
+    description: Adds a heart to the target player
+    usage: /<command> <minor|major> [username]
+    aliases: []
+    permission: permission.addheart
 
 permissions:
   permission.customitem:
@@ -35,3 +40,5 @@ permissions:
     default: true
   permission.banneditems:
     default: true
+  permission.addheart:
+    default: op

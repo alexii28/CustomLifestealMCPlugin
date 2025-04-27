@@ -11,11 +11,16 @@ public class BannedItemsCommand {
         player.sendMessage(ChatColor.GOLD + "List of all banned OR modified items on Lifesteal.");
         String bannedItemsStr = "";
         for(Material[] materialArr : BannedItems.BANNED_ITEMS){
-            
             for(Material item : materialArr){
                 bannedItemsStr += item + ", ";
                 
             }
+        }
+
+        //add any additional items
+        for(Material item : BannedItems.MANUALLY_BAN){
+            bannedItemsStr += item + ", ";
+            
         }
         player.sendMessage(ChatColor.GOLD + bannedItemsStr);
     }
