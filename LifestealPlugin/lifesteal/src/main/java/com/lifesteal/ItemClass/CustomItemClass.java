@@ -18,6 +18,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.SmithingTransformRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.CustomModelDataComponent;
 
 import com.lifesteal.Plugin;
 
@@ -29,6 +30,11 @@ public abstract class CustomItemClass implements Listener {
     protected List<String> lore;
     protected Rarity rarity;
     protected Plugin plugin;
+    protected ItemStack itemCopy;
+
+    public ItemStack getItemCopy() {
+        return itemCopy;
+    }
 
     public CustomItemClass(String name, Material material, Rarity rarity, List<String> lore, Plugin plugin){
         this.name = name;
@@ -36,11 +42,13 @@ public abstract class CustomItemClass implements Listener {
         this.rarity = rarity;
         this.lore = lore;
         this.plugin = plugin;
+        this.itemCopy = create();
 
         createRecipe();
+        
     }
 
-    public ItemStack create() {
+    private ItemStack create() {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(rarity.getColor() + name);
@@ -60,8 +68,12 @@ public abstract class CustomItemClass implements Listener {
         for (Attribute attribute : Registry.ATTRIBUTE) {
             meta.removeAttributeModifier(attribute);
         }
+        CustomModelDataComponent customMeta = meta.getCustomModelDataComponent();
 
-        meta.setCustomModelData(1); //Make the item 'custom'
+        customMeta.setFloats(List.of(1f));
+
+        meta.setCustomModelDataComponent(customMeta);
+        //meta.setCustomModelData(1);
 
         item.setItemMeta(meta);
         return item;
@@ -74,14 +86,14 @@ public abstract class CustomItemClass implements Listener {
       */
     public ShapedRecipe createRecipe(){
         int count = 1;
-        
+
         ShapedRecipe recipe = null;
         String keyName = generateKeyName(name);
         while(Bukkit.getRecipe(new NamespacedKey(plugin, keyName)) != null){
             keyName = keyName.concat(String.valueOf(count));
             count++;
         }
-        recipe = new ShapedRecipe(new NamespacedKey(plugin, keyName), this.create());
+        recipe = new ShapedRecipe(new NamespacedKey(plugin, keyName), itemCopy);
         /*  Create shape using ShapedRecipe. Follow model below:
          *  recipe.shade("X", "X", "X");
          *  recipe.setIngredient('X', Material.(yourMaterial));
@@ -103,7 +115,7 @@ public abstract class CustomItemClass implements Listener {
             keyName = keyName.concat(String.valueOf(count));
             count++;
         }
-        recipe = new SmithingTransformRecipe(new NamespacedKey(plugin, keyName), this.create(), template, base, addition);
+        recipe = new SmithingTransformRecipe(new NamespacedKey(plugin, keyName), itemCopy, template, base, addition);
         return recipe;
     }
 

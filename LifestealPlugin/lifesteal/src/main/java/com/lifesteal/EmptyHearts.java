@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -14,7 +12,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.lifesteal.Commands.Tutorial;
@@ -28,14 +25,6 @@ public class EmptyHearts implements Listener{
     public Plugin plugin;
     public EmptyHearts(Plugin plugin) {
         this.plugin = plugin;
-    }
-
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent e){
-        Bukkit.getLogger().info("emptyhearts");
-        Player player = e.getEntity();
-        AttributeInstance maxHealth = player.getAttribute(Attribute.MAX_HEALTH);
-        double newHealth = maxHealth.getBaseValue();
     }
 
     @EventHandler

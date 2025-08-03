@@ -41,13 +41,13 @@ public class BeaconOfLife extends CustomItemClass{
     @Override
     public ShapedRecipe createRecipe(){
         ShapedRecipe recipe = super.createRecipe();
-        recipe.shape(  "YYY",
+        recipe.shape(  "YMY",
                                 "MRM",
-                                "DND");
-        recipe.setIngredient('Y', new RecipeChoice.ExactChoice(new MajorHeartCrystal(plugin).create()));
-        recipe.setIngredient('M', new RecipeChoice.ExactChoice(new MinorHeartCrystal(plugin).create()));
+                                "DDD");
+        recipe.setIngredient('Y', new RecipeChoice.ExactChoice(new MajorHeartCrystal(plugin).getItemCopy()));
+        recipe.setIngredient('M', new RecipeChoice.ExactChoice(new MinorHeartCrystal(plugin).getItemCopy()));
         recipe.setIngredient('R', Material.RECOVERY_COMPASS);
-        recipe.setIngredient('N', Material.NETHERITE_BLOCK);
+        recipe.setIngredient('N', Material.NETHERITE_INGOT);
         recipe.setIngredient('D', Material.DIAMOND_BLOCK);
 
         Bukkit.addRecipe(recipe);
@@ -57,7 +57,7 @@ public class BeaconOfLife extends CustomItemClass{
 
     @EventHandler
     public void onPlaceEvent(BlockPlaceEvent e){
-        if(e.getItemInHand().isSimilar(this.create())){
+        if(e.getItemInHand().isSimilar(itemCopy)){
             e.setCancelled(true);
         }
     }
@@ -65,7 +65,7 @@ public class BeaconOfLife extends CustomItemClass{
     @EventHandler
     public void onRightClick(PlayerInteractEvent e){
         ItemStack item = e.getItem();
-        if(item == null || !item.isSimilar(this.create())){
+        if(item == null || !item.isSimilar(itemCopy)){
             return;
         }
         if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK){
@@ -126,7 +126,7 @@ public class BeaconOfLife extends CustomItemClass{
             if(beaconItem == null){
                 return;
             }
-            if(!beaconItem.isSimilar(this.create())){
+            if(!beaconItem.isSimilar(itemCopy)){
                 player.sendMessage(ChatColor.RED + "Keep Holding the Beacon!");
                 return;
             }

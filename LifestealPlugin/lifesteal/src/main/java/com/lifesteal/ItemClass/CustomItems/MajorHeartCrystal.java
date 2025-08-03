@@ -18,7 +18,7 @@ import com.lifesteal.ItemClass.CustomItemClass;
 import com.lifesteal.ItemClass.Rarity;
 import com.lifesteal.LifestealClass.HealthClass;
 
-public class MajorHeartCrystal extends CustomItemClass{
+public class MajorHeartCrystal extends CustomItemClass{ 
     public MajorHeartCrystal(Plugin plugin) {
         super("Major Heart Crystal", Material.NETHER_STAR, Rarity.LEGENDARY, Arrays.asList("Add a heart."), plugin);
     }
@@ -27,14 +27,12 @@ public class MajorHeartCrystal extends CustomItemClass{
     @Override
     public ShapedRecipe createRecipe(){
         ShapedRecipe recipe = super.createRecipe();
-        recipe.shape(  "MGM",
-                                "NHN",
+        recipe.shape(  "MDM",
+                                "DGD",
                                 "MDM");
-        recipe.setIngredient('M', new RecipeChoice.ExactChoice(new MinorHeartCrystal(plugin).create()));
+        recipe.setIngredient('M', new RecipeChoice.ExactChoice(new MinorHeartCrystal(plugin).getItemCopy()));
         recipe.setIngredient('D', Material.DIAMOND_BLOCK);
-        recipe.setIngredient('N', Material.NETHERITE_INGOT);
         recipe.setIngredient('G', Material.ENCHANTED_GOLDEN_APPLE);
-        recipe.setIngredient('H', Material.HEAVY_CORE);
 
         Bukkit.addRecipe(recipe);
 
@@ -48,7 +46,7 @@ public class MajorHeartCrystal extends CustomItemClass{
             return;
         }
         Player player = e.getPlayer();
-        if (item.isSimilar(create())){
+        if (item.isSimilar(itemCopy)){
             e.setCancelled(true);
             if(addMajorHeart(player)){
                 item.setAmount(item.getAmount() - 1);

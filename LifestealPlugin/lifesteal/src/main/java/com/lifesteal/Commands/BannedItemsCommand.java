@@ -18,7 +18,7 @@ public class BannedItemsCommand {
         }
 
         //add any additional items
-        for(Material item : BannedItems.MANUALLY_BAN){
+        for(Material item : BannedItems.MANUAL_BAN){
             bannedItemsStr += item + ", ";
             
         }

@@ -11,20 +11,23 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * @param SOFTBAN is an item that is able to be obtained, but not used (left or right click). Can be used to craft.
+ * @param HARDBAN is an item that is unable to be obtained. Can not pick up or use.
+ * @param MANUALLYBAN is an item that is modified to have custom restrictions or implementation.
+ */
 public class BannedItems implements Listener{
+    
     public static final Material[] SOFT_BAN = {
-        Material.ENDER_PEARL
     };
     public static final Material[] HARD_BAN = {
-        Material.TOTEM_OF_UNDYING,
-        Material.END_CRYSTAL
+        Material.TOTEM_OF_UNDYING
     };
-    public static final Material[] MANUALLY_BAN = {
+    public static final Material[] MANUAL_BAN = {
         Material.NETHERITE_HELMET,
         Material.NETHERITE_CHESTPLATE,
         Material.NETHERITE_LEGGINGS,
-        Material.NETHERITE_HELMET,
-        Material.MACE
+        Material.NETHERITE_HELMET
     };
 
     public static final Material[][] BANNED_ITEMS = {

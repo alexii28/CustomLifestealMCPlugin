@@ -26,14 +26,13 @@ public class MinorHeartCrystal extends CustomItemClass{
     @Override
     public ShapedRecipe createRecipe(){
         ShapedRecipe recipe = super.createRecipe();
-        recipe.shape(  "DPD",
-                                "ENE",
-                                "DUD");
+        recipe.shape(  "DGD",
+                                "GEG",
+                                "DND");
         recipe.setIngredient('D', Material.DIAMOND_BLOCK);
-        recipe.setIngredient('U', Material.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
+        recipe.setIngredient('G', Material.GLASS);
         recipe.setIngredient('E', Material.ENDER_EYE);
         recipe.setIngredient('N', Material.NETHERITE_INGOT);
-        recipe.setIngredient('P', Material.TURTLE_HELMET);
 
         Bukkit.addRecipe(recipe);
 
@@ -47,7 +46,7 @@ public class MinorHeartCrystal extends CustomItemClass{
             return;
         }
         Player player = e.getPlayer();
-        if (item.isSimilar(create())){
+        if (item.isSimilar(itemCopy)){
             e.setCancelled(true);
             if(addMinorHeart(player)){
                 item.setAmount(item.getAmount() - 1);

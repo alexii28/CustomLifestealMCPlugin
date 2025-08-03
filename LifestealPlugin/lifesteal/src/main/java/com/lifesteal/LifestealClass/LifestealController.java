@@ -54,7 +54,7 @@ public class LifestealController extends HealthClass implements Listener{
             //check if player should lose a minor or major heart
             if (player.getAttribute(Attribute.MAX_HEALTH).getBaseValue() <= MINOR_RESPAWN_HEARTS_LIMIT){
                 //set dropped item to minor heart
-                item = new MinorHeartCrystal(plugin).create();
+                item = new MinorHeartCrystal(plugin).getItemCopy();
 
                 //check if player died to a different player
                 if(killer != null && killer.getType() == EntityType.PLAYER && !player.equals(killer)){
@@ -72,14 +72,12 @@ public class LifestealController extends HealthClass implements Listener{
                     return;
                 }
                 else{
-                    item = new MajorHeartCrystal(plugin).create();
+                    item = new MajorHeartCrystal(plugin).getItemCopy();
                 }
             }
             if(doDropHeart){
-                Bukkit.getLogger().info("called1");
                 dropHeart(player, item);
             } else if(doPutHeartInventory){
-                Bukkit.getLogger().info("called2");
                 inventoryHeart(player, item);
             }
         }
@@ -88,12 +86,10 @@ public class LifestealController extends HealthClass implements Listener{
     //Drop the player's heart on the ground as an item
     public void dropHeart(Player player, ItemStack item){
         //drop player's heart
-        Bukkit.getLogger().info("called3");
         player.getWorld().dropItemNaturally(player.getLocation().add(0, 1, 0), item);
     }
 
     public void inventoryHeart(Player player, ItemStack item){
-        Bukkit.getLogger().info("called4");
         if(!player.getInventory().addItem(item).isEmpty()){
             player.sendMessage("Inventory Full! Dropping Heart on ground");
             dropHeart(player, item);

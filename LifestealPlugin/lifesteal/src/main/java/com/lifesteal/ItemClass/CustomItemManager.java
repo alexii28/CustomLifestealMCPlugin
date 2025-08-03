@@ -44,7 +44,7 @@ public class CustomItemManager implements CommandExecutor, Listener {
             command.setExecutor((sender, cmd, label, args) -> {
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
-                    player.getInventory().addItem(item.create());
+                    player.getInventory().addItem(item.getItemCopy());
                     player.sendMessage("You've received the " + item.getName() + "!");
                     return true;
                 }
@@ -80,7 +80,7 @@ public class CustomItemManager implements CommandExecutor, Listener {
             
             if (sender instanceof Player) {
                 Player player = (Player) sender;
-                player.getInventory().addItem(item.create());
+                player.getInventory().addItem(item.getItemCopy());
                 player.sendMessage("You've received the " + item.getName() + "!");
             } else {
                 sender.sendMessage("This command can only be used by players.");
@@ -108,7 +108,7 @@ public class CustomItemManager implements CommandExecutor, Listener {
         for(ItemStack item : inventory.getMatrix()) {
             if(item != null && item.hasItemMeta()){
                 ItemMeta meta = item.getItemMeta();
-                if (meta.hasCustomModelData()){
+                if (!meta.getCustomModelDataComponent().getFloats().isEmpty()){
                     if(inventory.getResult() != null && !inventory.getResult().hasItemMeta()){
                         inventory.setResult(null);
                     }
@@ -116,7 +116,7 @@ public class CustomItemManager implements CommandExecutor, Listener {
                 }
                 else if (inventory.getResult() != null && inventory.getResult().hasItemMeta()){
                     ItemMeta resultMeta = inventory.getResult().getItemMeta();
-                    if (resultMeta.hasCustomModelData()){
+                    if (!resultMeta.getCustomModelDataComponent().getFloats().isEmpty()){
                         inventory.setResult(null);
                         return;
                     }

@@ -16,23 +16,6 @@ public class LifestealController implements Listener{
     
     private static final int MAXIMUM_HEALTH = 40; // MAXIMUM_HEALTH / 2 = MAXIMUM_HEARTS
 
-    /*@EventHandler
-    public void onPlayerDeath(PlayerDeathEvent e){
-        Bukkit.getLogger().info("lifestealcontroller");
-        Player player = e.getEntity().getPlayer();
-        Player killer = player.getKiller();
-
-        //displayedHealth = getHealth() / getMaxHealth() * getHealthScale()
-
-        if (killer != null){
-            addHeart(killer);
-        }
-
-
-        if (player != null){
-            removeHeart(player);
-        }
-    }*/
     //Return true if successful, false otherwise
     public static boolean addHeart(Player player){
         AttributeInstance playerHealthInstance = player.getAttribute(Attribute.MAX_HEALTH);

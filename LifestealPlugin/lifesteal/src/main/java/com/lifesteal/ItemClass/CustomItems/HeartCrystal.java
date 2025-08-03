@@ -47,7 +47,7 @@ public class HeartCrystal extends CustomItemClass{
             return;
         }
         Player player = e.getPlayer();
-        if (item.isSimilar(create())){
+        if (item.isSimilar(itemCopy)){
             e.setCancelled(true);
             if(LifestealController.addHeart(player)){
                 item.setAmount(item.getAmount() - 1);
